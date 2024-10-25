@@ -45,9 +45,15 @@ namespace Lorekeeper_Fabien_ARTHUR
                 connection.Close();
             }
 
+            // show all characters names
             PersonnageController persoControllerInstance = PersonnageController.Instance;
             List<Personnage> allPersos = persoControllerInstance.getPersonnageByWorld(1);
-            PersoTitle.Text = allPersos[0].getName();
+            List<string> allNames = new List<string>();
+            foreach (Personnage perso in allPersos)
+            {
+                allNames.Add(perso.getName());
+            }
+            TestListBox.ItemsSource = allNames;
         }
     }
 }

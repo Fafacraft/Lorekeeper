@@ -1,12 +1,7 @@
-﻿using DesktopDev_Arthur_Fabien;
-using Lorekeeper_Fabien_ARTHUR.Objets;
+﻿using Lorekeeper_Fabien_ARTHUR.Objets;
+using Lorekeeper_Fabien_ARTHUR.Utils;
 using MySqlConnector;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Lorekeeper_Fabien_ARTHUR.Controllers
 {
@@ -75,7 +70,7 @@ namespace Lorekeeper_Fabien_ARTHUR.Controllers
             {
                 connection.Open();
                 // make the sql request
-                using var command = new MySqlCommand("SELECT * FROM personnage WHERE playerId = @idPlayer;", connection);
+                using MySqlCommand command = new MySqlCommand("SELECT * FROM personnage WHERE playerId = @idPlayer;", connection);
                 command.Parameters.AddWithValue("@idPlayer", playerIdToSearch);
                 MySqlDataReader reader = command.ExecuteReader();
                 System.Diagnostics.Debug.WriteLine("Found personnages : " + reader.HasRows);
@@ -103,4 +98,4 @@ namespace Lorekeeper_Fabien_ARTHUR.Controllers
         }
     }
 }
-}
+

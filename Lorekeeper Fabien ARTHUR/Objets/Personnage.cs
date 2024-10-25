@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Lorekeeper_Fabien_ARTHUR.Controllers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -8,69 +9,43 @@ using System.Web;
 
 namespace Lorekeeper_Fabien_ARTHUR.Objets
 {
-    internal class Personnage
+    public class Personnage
     {
-        private int idPersonnage;
-        private string name;
-        private int playerId;
-        private int worldId;
-        private string? title;
-        private string? level;
-        private string? race;
+        public int idPersonnage { get; set; }
+        public string name { get; set; }
+        public int playerId { get; set; }
+        public int worldId { get; set; }
+        public string? title { get; set; }
+        public string? level { get; set; }
+        public string? race { get; set; }
+        
+        public Player? author { get; set; }
+        public World? world { get; set; }
+
 
         public Personnage(int idPersonnage, string name, int playerId, int worldId, string? title = null, string? level = null, string? race = null) {
             this.name = name;
             this.idPersonnage = idPersonnage;
             this.playerId = playerId;
             this.worldId = worldId;
-        }
-
-
-
-        public int getIdPersonnage()
-        {
-            return idPersonnage;
-        }
-        public string getName()
-        {
-            return name;
-        }
-        public int getPlayerId()
-        {
-            return playerId;
-        }
-        public int getWorldId()
-        {
-            return worldId;
-        }
-        public string? getTitle()
-        {
-            return title;
-        }
-        public string? getLevel()
-        {
-            return level;
-        }
-        public string? getRace()
-        {
-            return race;
-        }
-
-        public void setName(string name)
-        {
-            this.name = name;
-        }
-        public void setTitle(string? title)
-        {
             this.title = title;
-        }
-        public void setLevel(string? level)
-        {
             this.level = level;
-        }
-        public void setRace(string? race)
-        {
             this.race = race;
+            Calculate();
         }
+
+        /*
+         * Generate everything needed, make world and player corresponding to the character.
+         */
+        private void Calculate()
+        {
+            WorldController worldController = WorldController.Instance;
+            this.world = worldController.getWorldById(worldId);
+            PlayerController playerController = PlayerController.Instance;
+            this.author = playerController.getPlayerById(playerId);
+        }
+
+
+
     }
 }

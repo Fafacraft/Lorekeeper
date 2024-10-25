@@ -1,17 +1,11 @@
-﻿using DesktopDev_Arthur_Fabien;
-using Lorekeeper_Fabien_ARTHUR.Controllers;
+﻿using Lorekeeper_Fabien_ARTHUR.Controllers;
 using Lorekeeper_Fabien_ARTHUR.Objets;
+using Lorekeeper_Fabien_ARTHUR.Utils;
 using MySqlConnector;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Lorekeeper_Fabien_ARTHUR
 {
@@ -20,6 +14,8 @@ namespace Lorekeeper_Fabien_ARTHUR
     /// </summary>
     public partial class MainWindow : Window
     {
+        public ObservableCollection<Personnage> PersonnageList { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
@@ -47,13 +43,14 @@ namespace Lorekeeper_Fabien_ARTHUR
 
             // show all characters names
             PersonnageController persoControllerInstance = PersonnageController.Instance;
-            List<Personnage> allPersos = persoControllerInstance.getPersonnageByWorld(1);
-            List<string> allNames = new List<string>();
-            foreach (Personnage perso in allPersos)
-            {
-                allNames.Add(perso.getName());
-            }
-            TestListBox.ItemsSource = allNames;
+            List<Personnage> personnages = persoControllerInstance.getPersonnageByWorld(1);
+            PersonnageList = new ObservableCollection<Personnage>(personnages);
+            DataContext = this;
+        }
+
+        private void TestListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

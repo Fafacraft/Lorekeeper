@@ -1,15 +1,14 @@
 Welcome in this first version of Lorekeeper
-
+   
 This project was inspired by my experience in different roleplay communities, notably on Discord, and the often well needed for a well organized annuary of characters to be able to find their sheet more easily.
-
-
-To start : 
-    - Start a local mysql server, with :
-        - a database named 'lorekeeper'
-        - username : root
-        - password : Test123
-
-    - Execute the .exe
+   
+   
+To start :   
+    - Start a local mysql server, with :   
+        - a database named 'lorekeeper'   
+        - username : root   
+        - password : Test123   
+    - Execute the .exe   
 
 
 Functions : 
